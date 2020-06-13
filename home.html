@@ -12,8 +12,7 @@
         <button type="submit" class="search_button"> Search for GIFs </button>
         <input type="reset" id="reset_button" value="Reset">
       </form>
-      <div class="rando_facts animated bounceIn">
-        <img class="img-container" src=""/>
+      <div id="here_is_gif">
       </div>
   </div>
 
@@ -44,16 +43,16 @@
 
           // This is the API response data. It's a JSON object of 25 gifs
           console.log(response.data);
-
+          var imgObj = { img : response.data[0].images.fixed_height.url};
           // For simplicity, we will take the first gif (ie. at postion 0)
           var htmlOutput = "";
-
-          for(var i = 0; i < 18; i++)
-          {
-          var imageElement = '<img src="#SRC#" />';
-          htmlOutput += imageElement.replace('#SRC#', response.data[i].images.fixed_height.url);
+          for(var i=0;i<=18;i++){
+            var img = document.createElement("img");
+            img.src = response.data[i].images.fixed_height.url;
+            var src = document.getElementById("here_is_gif");
+            src.appendChild(img)
           }
-        $('.img-container').append(htmlOutput);
+
         });
 
         // Part 3 - Clear the Gif using the reset_button id (#)
