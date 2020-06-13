@@ -13,9 +13,10 @@
         <input type="reset" id="reset_button" value="Reset">
       </form>
       <div class="rando_facts animated bounceIn">
-        <img id="here_is_gif" src=""/>
+        <img class="img-container" src=""/>
       </div>
   </div>
+
 
   <!-- Link in jQuery from CDN -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -45,12 +46,14 @@
           console.log(response.data);
 
           // For simplicity, we will take the first gif (ie. at postion 0)
-          var giphyURL = response.data[0].images.fixed_height.url;
-          console.log(giphyURL)
+          var htmlOutput = "";
 
-          // Now you can pass that into your "here_is_gif" <img> tag using its id (#)
-          $('#here_is_gif').attr('src', giphyURL);
-
+          for(var i = 0; i < 18; i++)
+          {
+          var imageElement = '<img src="#SRC#" />';
+          htmlOutput += imageElement.replace('#SRC#', response.data[i].images.fixed_height.url);
+          }
+        $('.img-container').append(htmlOutput);
         });
 
         // Part 3 - Clear the Gif using the reset_button id (#)
